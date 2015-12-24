@@ -69,12 +69,14 @@ return
 	return
 #IfWinActive
 
-vpkGui:
-	vpkGui(action)
-return
+
 
 closeAhk:
 	Process, Close, Autohotkey.exe
+return
+
+vpkGui:
+	vpkGui(action)
 return
 
 vpkGui(action) {
