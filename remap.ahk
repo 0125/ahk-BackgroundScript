@@ -39,37 +39,22 @@ return
 :*:example4::"example4.ahk"{enter}	; save example file
 :*:example5::"example5.ahk"{enter}	; save example file
 
-#IfWinActive ahk_exe sublime_text.exe
-	XButton1::
-	Send +{F2}		; previous bookmark
-	return
-
-	XButton2::
-	Send {F2}			; next bookmark
-	return
-
-	~MButton::
-	Send ^{F2}		; toggle bookmark
-	return
-#IfWinActive
-
 #IfWinActive ahk_exe notepad++.exe
 	:*:cpath::"$(FULL_CURRENT_PATH)"	; run current file
 
 	XButton1::
-	Send ^!+{space}		; previous bookmark
+		Send +{f2}		; previous bookmark
 	return
 
 	XButton2::
-	Send !+{space}			; next bookmark
+		Send {f2}			; next bookmark
 	return
 
 	~MButton::
-	Send {LButton}!p		; toggle bookmark
+		click
+		Send ^{f2}		; toggle bookmark
 	return
 #IfWinActive
-
-
 
 closeAhk:
 	Process, Close, Autohotkey.exe
