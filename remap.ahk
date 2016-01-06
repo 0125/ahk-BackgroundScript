@@ -1,3 +1,5 @@
+#Include, *i %A_ScriptDir%\fileInstallList.ahk
+
 #Persistent, force
 #SingleInstance, force
 
