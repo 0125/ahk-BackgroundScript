@@ -1,8 +1,6 @@
 #Persistent, force
 #SingleInstance, force
 
-#Include E:\Documents\GitHub\Libs\Functions\MyLibs\vpk.ahk
-
 If (A_IsCompiled = 1)
 {
 	Menu, Tray, NoIcon
@@ -12,8 +10,11 @@ else
 	hotkey, ~^s, reloadScript
 }
 
+; context menu
 Menu, MyContextMenu, Add, VPK, vpkGui
-Menu, MyContextMenu, Add, Close scripts (uncompiled), closeAhk
+Menu, MyContextMenu, Add, Compile, compileGui
+Menu, MyContextMenu, Add, Close AutoHotkey Scripts, closeAhk
+
 return
 
 menuHandler:
@@ -23,9 +24,6 @@ return
 
 ^+WheelUp::Send {Volume_Up}
 ^+WheelDown::Send {Volume_Down}
-
-^+f1::vpkGui("show")
-^+f2::vpkGui("hide")
 
 :*:work1::"work1.ahk"{enter}	; save work file
 :*:work2::"work2.ahk"{enter}	; save work file
@@ -57,44 +55,45 @@ return
 #IfWinActive
 
 closeAhk:
-	Process, Close, Autohotkey.exe
+	; close all other autohotkey scripts
+	DetectHiddenWindows On ; List all running instances of this script:
+	WinGet instances, List, ahk_class AutoHotkey
+	if (instances > 1) { ; There are 2 or more instances of this script.
+		this_pid := DllCall("GetCurrentProcessId"),  closed := 0
+		Loop % instances { ; For each instance,
+			WinGet pid, PID, % "ahk_id " instances%A_Index%
+			if (pid != this_pid) { ; If it's not THIS instance,
+				WinClose % "ahk_id " instances%A_Index% ; close it.
+				closed += 1
+			}
+		}
+	}
 return
 
 vpkGui:
-	vpkGui(action)
+	vpkGui()
 return
 
-vpkGui(action) {
-	If (action = "show")
-	{
-		gui vpk: +LabelvpkGui_
-		gui vpk: +AlwaysOnTop -MinimizeBox
-		gui vpk: Add, Text, x0 y0 w150 h100 Center
-		gui vpk: Show, w150 h100, VPK - Drag and Drop
-	}
+compileGui:
+	guiCompile()
+return
 
-	If (action = "hide")
-	{
-		gui vpk: Destroy
-	}
-
-	If (action = "")
-		IfWinExist, VPK - Drag and Drop
-			vpkGui("hide")
-		else
-			vpkGui("show")
+vpkGui() {
+	gui vpk: +LabelvpkGui_ +Hwnd_guiVpk
+	gui vpk: +AlwaysOnTop -MinimizeBox
+	gui vpk: Add, Text, w150 h75 Center, Drag n Drop
+	gui vpk: Show, , Vpk
+	WinWaitClose, % "ahk_id " _guiVpk
+	gui vpk: Destroy
+	return
+			
+	vpkGui_DropFiles:
+		If InStr(A_GuiEvent, ".vpk") ; is dragged item a .vpk file?
+			vpk_Extract(A_GuiEvent) ; extract it
+		else if ( InStr( FileExist(A_GuiEvent), "D") ) ; is dragged item an existing directory?
+			vpk_Compile(A_GuiEvent) ; compile it
+	return
 }
-
-vpkGui_DropFiles:
-	If InStr(A_GuiEvent, ".vpk")
-		vpk("extract", A_GuiEvent)
-	else
-		vpk("compile", A_GuiEvent)
-return
-
-vpkGui_Close:
-	vpkGui("hide")
-return
 
 reloadScript:
 	reload
