@@ -14,11 +14,11 @@
 	gui mute: add, button, w250 r1 gguiMute_btnMute, Mute
 	
 	; show
-	gui mute: show, x0 y0
+	gui mute: show
 	
 	; hotkeys
 	hotkey, IfWinExist, % "ahk_id " _guiMute
-	hotkey, escape, guiMute_close
+		hotkey, escape, guiMute_close
 	hotkey, ifwinexist
 	
 	; close 

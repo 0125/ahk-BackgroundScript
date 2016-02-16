@@ -86,11 +86,11 @@ closeAhk:
 return
 
 addonInfoWrapperGui:
-	addonInfoWrapper_Gui()
+	guiAddonInfoWrapper()
 return
 
 vpkGui:
-	vpk_Gui()
+	guiVpk()
 return
 
 compileGui:
