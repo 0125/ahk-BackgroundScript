@@ -13,8 +13,26 @@ return
 ; hotkeys
 ^+c::Menu, MyContextMenu, Show
 
-^+WheelUp::Send {Volume_Up}
-^+WheelDown::Send {Volume_Down}
+^+WheelUp::
+	SoundSet +1
+	
+	SoundGet, volumeLevel
+	
+	tooltip % Round(volumeLevel)
+	SetTimer, removeToolTip, -250
+return
+^+WheelDown::
+	SoundSet -1
+	
+	SoundGet, volumeLevel
+	
+	tooltip % Round(volumeLevel)
+	SetTimer, removeToolTip, -250
+return
+
+removeToolTip:
+	tooltip
+return
 
 :*:work1::"work1.ahk"{enter}	; save work file
 :*:work2::"work2.ahk"{enter}	; save work file
