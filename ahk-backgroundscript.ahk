@@ -4,6 +4,8 @@
 
 Gosub loadSettings
 Gosub setContextMenu
+
+guiVpk()
 return
 #Include, %A_ScriptDir%\inc
 #Include, guiVpk.ahk
@@ -121,4 +123,9 @@ return
 
 reloadScript:
 	reload
+return
+
+~^s::
+	If !(A_IsCompiled = 1)
+		reload
 return

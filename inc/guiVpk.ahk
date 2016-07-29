@@ -39,11 +39,13 @@
 	guiVpk_DropFiles:
 		vpk_Source := A_GuiEvent
 		
+		msgbox % vpk_Source
+		
 		SplitPath, vpk_Source, , vpk_SourceDir, , vpk_OriginalCompileTitle
 		
 		GuiControl vpk:, vpk_Source, % vpk_Source
 		
-		If InStr(vpk_Source, ".vpk") ; is dragged item a .vpk file?
+		If InStr(vpk_Source, ".vpk") ; is source a .vpk file?
 		{
 			GuiControl vpk:, guiVpk_btnCompile, Extract
 			GuiControl vpk: enable, guiVpk_btnCompile
@@ -51,7 +53,7 @@
 			GuiControl vpk:, vpk_CompileTitle, % vpk_OriginalCompileTitle
 			GuiControl vpk: disable, vpk_CompileTitle
 		}
-		else if ( InStr( FileExist(vpk_Source), "D") ) ; is dragged item an existing directory?
+		else if ( InStr( FileExist(vpk_Source), "D") ) ; is source an existing directory?
 		{
 			GuiControl vpk:, guiVpk_btnCompile, Compile
 			GuiControl vpk: enable, guiVpk_btnCompile
