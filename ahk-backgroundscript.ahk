@@ -4,8 +4,6 @@
 
 Gosub loadSettings
 Gosub setContextMenu
-
-guiVpk()
 return
 #Include, %A_ScriptDir%\inc
 #Include, guiVpk.ahk

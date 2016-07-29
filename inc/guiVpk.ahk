@@ -23,7 +23,7 @@
 	hotkey, ifwinactive, % "ahk_id " _guiVpk
 		hotkey, enter, guiVpk_btnCompile
 	hotkey, ifwinactive
-	hotkey, ifwinexist
+	hotkey, ifwinexist, % "ahk_id " _guiVpk
 		hotkey, escape, guiVpk_close
 	hotkey, ifwinexist
 	
