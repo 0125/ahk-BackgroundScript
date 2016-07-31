@@ -38,9 +38,7 @@
 	
 	guiVpk_DropFiles:
 		vpk_Source := A_GuiEvent
-		
-		msgbox % vpk_Source
-		
+
 		SplitPath, vpk_Source, , vpk_SourceDir, , vpk_OriginalCompileTitle
 		
 		GuiControl vpk:, vpk_Source, % vpk_Source
