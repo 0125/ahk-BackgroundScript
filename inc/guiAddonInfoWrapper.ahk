@@ -2,7 +2,7 @@
 	global
 	
 	; properties
-	gui addonInfo: +LabelguiAddonInfo_ +Hwnd_guiaddonInfo
+	gui addonInfo: +LabelguiAddonInfoWrapper_ +Hwnd_guiAddonInfoWrapper
 	gui addonInfo: +AlwaysOnTop -MinimizeBox
 	
 	; controls
@@ -13,20 +13,20 @@
 	gui addonInfo: Show, , addonInfo
 	
 	; hotkeys
-	hotkey, IfWinExist, % "ahk_id " _guiaddonInfo
-		hotkey, escape, guiAddonInfo_Close
+	hotkey, IfWinExist, % "ahk_id " _guiAddonInfoWrapper
+		hotkey, escape, guiAddonInfoWrapper_Close
 	hotkey, ifwinexist
 	
 	; close
-	WinWaitClose, % "ahk_id " _guiaddonInfo
+	WinWaitClose, % "ahk_id " _guiAddonInfoWrapper
 	gui addonInfo: Destroy
 	return
 	
-	guiAddonInfo_Close:
+	guiAddonInfoWrapper_Close:
 		gui addonInfo: destroy
 	return
 	
-	guiAddonInfo_DropFiles:
+	guiAddonInfoWrapper_DropFiles:
 		addonInfo_Source := A_GuiEvent
 		SplitPath, addonInfo_Source, addonInfo_SourceFileName
 		If (addonInfo_SourceFileName = "addoninfo.txt")

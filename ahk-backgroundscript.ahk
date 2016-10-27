@@ -3,7 +3,6 @@
 #SingleInstance, force
 
 Gosub loadSettings
-Gosub setContextMenu
 return
 #Include, %A_ScriptDir%\inc
 #Include, guiVpk.ahk
@@ -11,7 +10,7 @@ return
 #Include, guiMute.ahk
 
 ; hotkeys
-^+c::Menu, MyContextMenu, Show
+^+c::Gosub showContextMenu
 
 ^+WheelUp::
 	SoundSet +1
@@ -34,34 +33,11 @@ removeToolTip:
 	tooltip
 return
 
-:*:work1::"work1.ahk"{enter}	; save work file
-:*:work2::"work2.ahk"{enter}	; save work file
-:*:work3::"work3.ahk"{enter}	; save work file
-:*:work4::"work4.ahk"{enter}	; save work file
-:*:work5::"work5.ahk"{enter}	; save work file
-
-:*:example1::"example1.ahk"{enter}	; save example file
-:*:example2::"example2.ahk"{enter}	; save example file
-:*:example3::"example3.ahk"{enter}	; save example file
-:*:example4::"example4.ahk"{enter}	; save example file
-:*:example5::"example5.ahk"{enter}	; save example file
-
-#IfWinActive ahk_exe notepad++.exe
-	:*:cpath::"$(FULL_CURRENT_PATH)"	; run current file
-
-	XButton1::
-		Send +{f2}		; previous bookmark
-	return
-
-	XButton2::
-		Send {f2}			; next bookmark
-	return
-
-	~MButton::
-		click
-		Send ^{f2}		; toggle bookmark
-	return
-#IfWinActive
+:*:work1::"work1.ahk"{enter}
+:*:work2::"work2.ahk"{enter}
+:*:work3::"work3.ahk"{enter}
+:*:work4::"work4.ahk"{enter}
+:*:work5::"work5.ahk"{enter}
 
 ; labels
 menuHandler:
@@ -78,13 +54,28 @@ else
 }
 return
 
-setContextMenu:
-	; context menu
+showContextMenu:
+	MouseGetPos, , , g_mouseOverHwnd
+	
+	Menu, MoveWindow, Add, Center, MoveWindowCenter
+	Menu, MoveWindow, Add, Top, MoveWindowTop
+	Menu, MoveWindow, Add, Bottom, MoveWindowBottom
+	Menu, MoveWindow, Add, Left, MoveWindowLeft
+	Menu, MoveWindow, Add, TopLeft, MoveWindowTopLeft
+	Menu, MoveWindow, Add, BottomLeft, MoveWindowBottomLeft
+	Menu, MoveWindow, Add, Right, MoveWindowRight
+	Menu, MoveWindow, Add, TopRight, MoveWindowTopRight
+	Menu, MoveWindow, Add, BottomRight, MoveWindowBottomRight
+	
+	Menu, MyContextMenu, Add, Window, :MoveWindow
+	
 	Menu, MyContextMenu, Add, VPK, vpkGui
 	Menu, MyContextMenu, Add, AddonInfo, addonInfoWrapperGui
 	Menu, MyContextMenu, Add, Compile, compileGui
 	Menu, MyContextMenu, Add, Mute Files, muteGui
 	Menu, MyContextMenu, Add, Close AutoHotkey Scripts, closeAhk
+	
+	Menu, MyContextMenu, Show
 return
 
 closeAhk:
@@ -121,6 +112,43 @@ return
 
 reloadScript:
 	reload
+return
+
+MoveWindowCenter:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowTop:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowBottom:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowLeft:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowTopLeft:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowBottomLeft:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowRight:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowTopRight:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
+return
+MoveWindowBottomRight:
+	StringReplace, g_output, A_ThisLabel, MoveWindow
+	WinMovePos(g_mouseOverHwnd, g_output)
 return
 
 ~^s::
