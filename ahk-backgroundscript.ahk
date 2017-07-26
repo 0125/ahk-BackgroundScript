@@ -10,7 +10,16 @@ return
 #Include, guiMute.ahk
 
 ; hotkeys
+backspace::capslock
+capslock::backspace
+SC056::p ; backwards slash
+
 ^+c::Gosub showContextMenu
+
+~!A::
+	WinGet, active_id, ID, A
+	WinSet, Topmost, , % "ahk_id " active_id
+return
 
 ^+WheelUp::
 	SoundSet +1
@@ -44,14 +53,10 @@ menuHandler:
 return
 
 loadSettings:
-If (A_IsCompiled = 1)
-{
-	Menu, Tray, NoIcon
-}
-else
-{
-	hotkey, ~^s, reloadScript
-}
+	If (A_IsCompiled = 1)
+	{
+		Menu, Tray, NoIcon
+	}
 return
 
 showContextMenu:
@@ -110,15 +115,11 @@ muteGui:
 	guiMute()
 return
 
-reloadScript:
-	reload
-return
-
 MoveWindowCenter:
 	StringReplace, g_output, A_ThisLabel, MoveWindow
 	WinMovePos(g_mouseOverHwnd, g_output)
 return
-MoveWindowTop:
+MoveWindowTop:	
 	StringReplace, g_output, A_ThisLabel, MoveWindow
 	WinMovePos(g_mouseOverHwnd, g_output)
 return
@@ -152,6 +153,6 @@ MoveWindowBottomRight:
 return
 
 ~^s::
-	If !(A_IsCompiled = 1)
+	If !(A_IsCompiled = 1) and WinActive("ahk_exe notepad++.exe")
 		reload
 return
