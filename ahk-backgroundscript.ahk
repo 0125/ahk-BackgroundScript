@@ -48,6 +48,10 @@ return
 :*:work4::"work4.ahk"{enter}
 :*:work5::"work5.ahk"{enter}
 
+:*:ahktemplate::
+SendInput, % "{raw}" template_script
+return
+
 ; labels
 menuHandler:
 return
@@ -57,6 +61,15 @@ loadSettings:
 	{
 		Menu, Tray, NoIcon
 	}
+
+template_script=
+(
+#SingleInstance, force
+
+msgbox
+
+~^s::reload
+)
 return
 
 showContextMenu:
