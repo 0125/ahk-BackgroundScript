@@ -1,0 +1,42 @@
+/*
+Idea:
+    Function to enable gaming mode
+        - Enables borderless window
+        - Draws crosshair in the middle
+        - Moves window to 0x0 coordinate
+        - Resizes window to fullscreen
+    
+    Issue: bioshock (unreal engine) does not respond to winset command to remove border
+
+enableGameMode() {
+    ; get hwnd under mouse
+    MouseGetPos, OutputVarX, OutputVarY, _Win, OutputVarControl
+    WinGetTitle, winTitle, % "ahk_id " _Win
+    If !(_Win) {
+        msgbox, 64, , % A_ThisFunc ": Could not retrieve handle of window under mouse!"
+        return
+    }
+
+    msgbox, 68, , % A_ThisFunc ": Enable game mode for '" winTitle "' ?"
+    IfMsgBox, No
+        return
+
+    ; modify window
+    WinSet, Style, -0xC00000, % "ahk_id " _Win    ; Remove borders
+    WinSet, Style, -0x40000, % "ahk_id " _Win     ; Including the resize border
+    WinSet, Style, -0xC40000, % "ahk_id " _Win     ; Including the resize border
+    WinMove, % "ahk_id " _Win, , 0, 0 , % A_ScreenWidth, % A_ScreenHeight
+}
+
+*/
+
+getMouseHwnd() {
+    ; get hwnd under mouse
+    MouseGetPos, OutputVarX, OutputVarY, _Win, OutputVarControl
+    WinGetTitle, winTitle, % "ahk_id " _Win
+    If !(_Win) {
+        msgbox, 64, , % A_ThisFunc ": Could not retrieve handle of window '" winTitle "' under mouse!"
+        return false
+    }
+    return _Win
+}

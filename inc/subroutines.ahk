@@ -1,0 +1,3 @@
+removeToolTip:
+	tooltip
+return
