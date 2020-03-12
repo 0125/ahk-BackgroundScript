@@ -9,6 +9,8 @@ guiCrosshair(img = "", hwnd = "") {
 		return false
 	}
 	
+	msgbox % img
+
 	; properties
 	gui crosshair: margin, 0, 0
 	gui crosshair: -caption +ToolWindow +E0x20 +LastFound

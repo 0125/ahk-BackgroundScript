@@ -33,8 +33,9 @@ MainMenu_disableCrosshair:
 return
 
 MainMenu_compileAhkScript:
-    guiCompile()
+    run % "D:\Apps\AutoHotkey\Lib\guiCompile.ahk"
 return
 
 dummyLabel:
 return
+

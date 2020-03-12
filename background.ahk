@@ -11,4 +11,6 @@ return
 #Include hotkeys.ahk
 #Include subroutines.ahk
 
+#If !(A_IsCompiled)
 ~^s::reload
+#If
