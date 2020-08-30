@@ -1,5 +1,10 @@
+; reload scripts
+    #If !A_IsCompiled
+    ~^s::reload
+    #If
+
 ; context menu
-^+c::Gosub showMainContextMenu ; ctrl + shift + c
+^+c::Menu, MainMenu, Show ; ctrl + shift + c
 
 ; rebinds
 backspace::capslock

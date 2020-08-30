@@ -1,3 +1,0 @@
-removeToolTip:
-	tooltip
-return
