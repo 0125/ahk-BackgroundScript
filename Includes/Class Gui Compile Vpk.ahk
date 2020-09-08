@@ -78,6 +78,7 @@ Class ClassGuiCompileVpk extends gui {
         }
 
         obj := this._GetAddonInfoObj(addonInfoFilePath)
+        msgbox % json.dump(obj,,2)
         this.SetText(this._vpkNameEdit, obj.addonTitle)
     }
 
@@ -122,14 +123,14 @@ Class ClassGuiCompileVpk extends gui {
             value := StrReplace(value, """")
             value := StrReplace(value, "`r") ; new line
             value := Trim(value)
-
+            
             ; get key by removign value + junk from line
             key := StrReplace(line, value)
             key := StrReplace(key, """")
             key := StrReplace(key, "`r") ; new line
             key := Trim(key)
-            
-            output[key] := value
+
+            output[value] := key
         }
         return output
     }

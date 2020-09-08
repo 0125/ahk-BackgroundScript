@@ -9,6 +9,8 @@
     #Include %A_ScriptDir%\Includes\menu.ahk
 
     ; Menu, MainMenu, Show
+
+    MainMenu_compileVpk()
 return
 
 ; labels
