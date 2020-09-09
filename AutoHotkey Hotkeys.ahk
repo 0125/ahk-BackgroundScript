@@ -10,7 +10,7 @@
 
     ; Menu, MainMenu, Show
 
-    MainMenu_compileVpk()
+    ; MainMenu_compileVpk()
 return
 
 ; labels
