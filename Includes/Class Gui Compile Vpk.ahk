@@ -78,7 +78,6 @@ Class ClassGuiCompileVpk extends gui {
         }
 
         obj := this._GetAddonInfoObj(addonInfoFilePath)
-        msgbox % json.dump(obj,,2)
         this.SetText(this._vpkNameEdit, obj.addonTitle)
     }
 
